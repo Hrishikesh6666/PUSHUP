@@ -8,6 +8,7 @@ import uvicorn
 import base64
 import logging
 import json
+import os
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -218,10 +219,12 @@ async def websocket_endpoint(websocket: WebSocket):
             logger.error(f"WebSocket already closed: {str(e)}")
 
 if __name__ == "__main__":
+    # Get the port from the environment variable, default to 8000 for local testing
+    port = int(os.environ.get("PORT", 8000))
     uvicorn.run(
         app,
         host="0.0.0.0",
-        port=8000,
+        port=port,
         log_level="info"
     )
 
