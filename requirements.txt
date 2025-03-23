@@ -4,3 +4,4 @@ uvicorn~=0.30.6
 fastapi~=0.115.8
 cvzone~=1.6.1
 starlette~=0.45.3
+mediapipe==0.10.3
