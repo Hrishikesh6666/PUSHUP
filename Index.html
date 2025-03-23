@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Check - Pushup Counter</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #1a1a1a;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      margin-top: 20px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 1.1em;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .status {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 1.2em;
+    }
+    .good {
+      color: #27ae60;
+    }
+    .bad {
+      color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+  <h1>Pushup API Checker</h1>
+
+  <div class="container">
+    <button onclick="checkAPI()">Check API Status</button>
+  </div>
+
+  <div id="status" class="status">Waiting for action...</div>
+
+  <script>
+    const statusElement = document.getElementById('status');
+
+    async function checkAPI() {
+      try {
+        statusElement.textContent = 'Checking API...';
+
+        const response = await fetch('https://pushup-4del.onrender.com/');
+
+        if (!response.ok) {
+          throw new Error(`API Error: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        statusElement.textContent = `API is working: ${JSON.stringify(data)}`;
+        statusElement.className = 'status good';
+      } catch (error) {
+        statusElement.textContent = `Error: ${error.message}`;
+        statusElement.className = 'status bad';
+      }
+    }
+  </script>
+</body>
+</html>
