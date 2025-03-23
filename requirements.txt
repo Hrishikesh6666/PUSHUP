@@ -1,5 +1,0 @@
-opencv-python~=4.10.0.84
-numpy~=1.26.4
-uvicorn~=0.30.6
-fastapi~=0.115.8
-cvzone~=1.6.1
